@@ -1,0 +1,59 @@
+<script type="text/javascript" src="path-to-mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<br>
+Recuerde que un PEG $G$ es una cuaterna $G =(\Sigma,V,P,S)$.
+<ol>
+  <li>$\Sigma$ es el conjunto de terminales. 
+  <li>$V$ es un conjunto (disjunto de $\Sigma$) que se denomina conjunto de 
+      <i>símbolos no terminales</i>,
+      <i>variables sintácticas</i> o <i>categorías gramáticales</i>,
+  <li>$P$ es un conjunto de pares de $V \times (V \cup \Sigma )^*$. En vez de escribir
+  un par usando la notación $(A, \alpha) \in P$ se escribe $A \leftarrow \alpha$.
+  Un elemento de $P$ se denomina <i>regla de análisis</i>. 
+  <li>Por último, $S$ es un símbolo del conjunto
+  $V$ que se denomina <i>expresión de arranque</i>.
+</ol>
+<ol>
+  <li> $\Sigma = \{ if, then, else, =, +, -, *, /, (, ), 0 \ldots 9 \}$, 
+  <li> $V = \{ st, exp, term, factor \} \cup$ <br />
+  $\{ASSIGN, ADD, MUL, LEFTPAR, RIGHTPAR \} \cup$ <br />
+  $\{IF, THEN, ELSE, ID, NUMBER, \_ \}$
+  <li> Reglas de Análisis:
+  <ol>
+<pre>
+st     = ID ASSIGN exp
+       / IF exp THEN st ELSE st
+       / IF exp THEN st
+exp    = term   (ADD term)*
+term   = factor (MUL factor)*
+
+factor = NUMBER
+       / ID
+       / LEFTPAR exp RIGHTPAR
+
+_ = $[ \t\n\r]*
+
+ASSIGN   = _ '=' _
+ADD      = _ [+-] _
+MUL      = _ [*/] _
+LEFTPAR  = _"("_
+RIGHTPAR = _")"_
+IF       = _ "if" _
+THEN     = _ "then" _
+ELSE     = _ "else" _
+ID       = _ [a-zA-Z_][a-zA-Z_0-9]* _
+NUMBER   = _ [0-9]+ _
+</pre>
+  </ol>
+  <li> Expresión de arranque: $st$
+</ol>
+<BR>
+<BR>
+<BR>
+
