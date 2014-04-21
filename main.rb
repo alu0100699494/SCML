@@ -7,6 +7,9 @@ helpers do
   end
 end
 
+get '/' do
+  erb :index
+end
 
 get '/grammar' do
   erb :grammar
