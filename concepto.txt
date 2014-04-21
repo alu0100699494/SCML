@@ -1,0 +1,59 @@
+﻿@link (rel: "stylesheet", type: "text/css", href: "global.css");
+@script (type: "text/javascipt", src: "main.js", casiano: "lolwut");
+
+@head {
+  @script { (")>
+    var a=1;
+    while (a == 1) {
+      console.log("test");.
+    }
+  <(") }
+}
+
+@div id_del_div.clase1.clase2 (style: "color: red;") {
+  @h1 {Esta es la cabecera}
+
+  \@
+
+  
+  (")> código javascript <(")
+
+  @raw { código html \} }
+
+  @p {
+    Hola \?{algo1, algo2\}
+
+    @b {
+      holahola
+    }
+    holaholahola
+    @a (href: "http://asdf.com/");
+  }
+}
+
+Escape:
+{
+}
+@
+
+Palabras reservadas:
+algo\@hmllñgkñlst
+_ @(ID) _
+
+Gramática:
+
+HEAD_TAGS: @title, @style, @meta, @base, @link, script, noscript
+TAG: '@' ID
+ID: [_a-zA-Z][_a-zA-Z0-9]*
+documento: (bloque_head)? (bloque)*
+bloque_head: '@head' '{' (head_tags)* '}'
+head_tags: HEAD_TAGS (parametros)? ('{'texto'}')?
+parametros: parametro (';' parametro)*
+parametro: ID ':' ["] ([^\].|[^"]) ["]
+bloque: TAG (ID)? ('.'ID)* (parametros)? (';' | ('{' (bloque|texto)* '}'))
+texto: (\\. | [^@}])* | literal
+literal: '(")>' "Cualquier cosa que no sea <(")" '<(")'
+
+SCML
+Structured C Markup Language
+
