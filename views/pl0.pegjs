@@ -32,14 +32,26 @@ block =  tag:TAG id:ID? classes:(DOT clid:ID { return clid; })* p:(parameters)? 
                        return {type: "block", tag: tag, id: id, classes: (classes? classes : []), parameters: (p? p : []), content: body };
                      }
 
-text = 't' { console.log("text");  return 't'; }
+text = t:(literal / $(!OPEN_LITERAL ( "\\". / [^@}] ) )+ )+
+                     {
+                       console.log("text :D -> Sergio");
+                       return {type: "text", content: t };
+                     }
 
+literal = OPEN_LITERAL l:$(!(CLOSE_LITERAL) . )* CLOSE_LITERAL 
+                     {
+                       console.log("literal :D -> Cristo");
+                       return l;
+                     }
 
 // Blancos
 _           = $[ \t\n\r]*
 
 KO       = _ !("\\") '{' _
 KC       = _ !("\\") '}' _
+
+OPEN_LITERAL  = _ '(")>' _
+CLOSE_LITERAL = _ '<(")' _
 
 PO       = _ '(' _
 PC       = _ ')' _
@@ -65,3 +77,5 @@ ID = _ id:$([a-zA-Z_][a-zA-Z_0-9]*) _
        { 
          return { type: 'ID', value: id }; 
        }
+       
+
