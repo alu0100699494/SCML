@@ -1,7 +1,7 @@
 $(document).ready(function() {
   $('#parse').click(function() {
     try {
-      var result = pl0.parse($('#input').val());
+      var result = scml.parse($('#input').val());
       $('#output').html(JSON.stringify(result,undefined,2));
     } catch (e) {
       $('#output').html('<div class="error"><pre>\n' + String(e) + '\n</pre></div>');

@@ -72,10 +72,9 @@ TAG = _  !("\\") '@' id:$([a-zA-Z_][a-zA-Z_0-9]*) _
         {
           return { type: 'TAG', value: id }; 
         }
-        
-ID = _ id:$([a-zA-Z_][a-zA-Z_0-9]*) _
+
+ID = _ id:$([a-zA-Z_][a-zA-Z_\-0-9]*) _
        { 
          return { type: 'ID', value: id }; 
        }
        
-
