@@ -1,0 +1,74 @@
+<div class="grid">
+  <div class="row">
+    <div class="span10 offset1"> <h1>Structured C Markup Language</h1></div>
+  </div>
+  
+  <div class="row">
+    <!--<div class="span10 offset1"> <p class="loadfile"> <input type="file" id="examples" /> </p> </div>  -->
+    <div class="span7 offset1">
+      Cargar fichero <div class="input-control file"> <input type="file" id="examples" /> <button class="btn-file"></button> </div>
+    </div> 
+  </div>
+  
+  <div class="row">
+    <div class="span5 offset1">
+      <div class="panel">
+        <div class="panel-header bg-dark fg-white">
+          Código <strong>SCML</strong>
+        </div>
+        <div class="panel-content">
+          <textarea id="input" name="input"  autofocus cols = "40" rows = "4">
+          </textarea>
+        </div>
+      </div>
+    </div>
+	<div class="span5">
+	  <div class="panel">
+        <div class="panel-header bg-dark fg-white">
+          Código <strong>HTML</strong> generado
+        </div>
+        <div class="panel-content">
+          <textarea id="html_output" name="input"  autofocus cols = "40" rows = "4">
+          </textarea>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="span2 offset1"> 
+      <button id="parse" type="button" class="success">Traducir</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span10 offset1">
+      <div class="panel">
+        <div class="panel-header bg-dark fg-white">
+          Árbol AST generado
+        </div>
+        <div class="panel-content">
+          <pre><span id="output">&lt;Vacío&gt;</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    // Generar un editor CodeMirror a partir del textarea INPUT (se borra y se reemplaza).
+    var editor = CodeMirror.fromTextArea(document.getElementById("input"), {
+      lineNumbers: true,
+      viewportMargin: Infinity
+    });
+	
+	var editor = CodeMirror.fromTextArea(document.getElementById("html_output"), {
+      lineNumbers: true,
+      viewportMargin: Infinity,
+	  readOnly: true
+    });
+</script>
+
+<script type="text/javascript" src="/pl0.js"></script>
+<script type="text/javascript" src="/main.js"></script>

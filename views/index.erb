@@ -1,35 +1,26 @@
-<h1>Analizador de PL0 ampliado usando PEG.js</h1>
-<div id="content">
-  <p class="loadfile">
-    <input type="file" id="examples" />
-  </p>
-  <p>
-  <nav>
-
-  </nav>
-  <table>
-    <tr>
-      <td>
-        <form action="/save" method="post">
-          <textarea id="input" name="input" 
-                    autofocus cols = "40" rows = "4">
-          </textarea>
-          <br/>
-          <label for="saveas">Save as</label>
-          <input id="saveas" type="text" name="fname" 
-                 title="name" pattern="\w+" />
-        </form>
-      </td>
-      <td><button id="parse" type="button">parse</button></td>
-    </tr>
-  </table>
-  </p>
-  <div class="output">
-    <pre>
-<span id="output"></span> <!-- Output goes here! --> 
-    </pre>
-  </div>
-</div>
-
-<script src="pl0.js"></script>
-<script src="main.js"></script>
+<!DOCTYPE HTML>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>SCML</title>
+  
+    <link rel="icon" type="image/jpg" href="/favicon.png" />
+    <link href="/css/iconFont.min.css" rel="stylesheet">
+  
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.9.2.min.js"></script>
+  
+    <script src="/js/metro.min.js"></script>
+  
+    <script src="/lib/codemirror.js"></script>
+    <script src="/mode/pl0/pl0.js"></script>
+  
+    <link rel="stylesheet" href="/lib/codemirror.css">
+    <link rel="stylesheet" href="/css/metro-bootstrap.css">
+  </head>
+  <body class="metro" style="background-color: #333333;">
+    <div style="text-align: center; vertical-align:middle; ">
+	  Contenido
+	</div>
+  </body>
+</html>

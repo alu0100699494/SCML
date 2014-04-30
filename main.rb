@@ -8,7 +8,11 @@ helpers do
 end
 
 get '/' do
-  erb :index
+  erb :index, :layout => false
+end
+
+get '/home' do
+  erb :home
 end
 
 get '/grammar' do
