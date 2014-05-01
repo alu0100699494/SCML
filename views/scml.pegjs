@@ -9,7 +9,7 @@ block_head = HEAD_TAG KO ht:(sentence_head_tags)* KC
              return (ht)? ht : [];
            }
              
-sentence_head_tags = tag:TAG p:(parameters)? t:( KO t:text KC { return t; } )?
+sentence_head_tags = tag:TAG p:(parameters)? t:( SEMICOLON { return null; } / (KO t:text KC { return t; }) )?
                    {
                      console.log("sentence_head_tags");
                      return {type: "head_block", tag: tag, parameters: (p? p : []), content: (t? t : "") };
