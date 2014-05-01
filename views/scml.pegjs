@@ -47,7 +47,8 @@ literal = OPEN_LITERAL l:$(!(CLOSE_LITERAL) . )* CLOSE_LITERAL
 // Blancos
 _       = COMMENT / [ \t\n\r]* COMMENT?
 
-COMMENT = "//"([^\n\r]![\r\n])*. _
+COMMENT = "/*" ([*]!("/") / [^*])* "*/" _ /
+          "//"([^\n\r]![\r\n])*. _
 
 KO       = _ !("\\") '{' _
 KC       = _ !("\\") '}' _
