@@ -45,7 +45,9 @@ literal = OPEN_LITERAL l:$(!(CLOSE_LITERAL) . )* CLOSE_LITERAL
         }
 
 // Blancos
-_           = $[ \t\n\r]*
+_       = COMMENT / [ \t\n\r]* COMMENT?
+
+COMMENT = "//"([^\n\r]![\r\n])*. _
 
 KO       = _ !("\\") '{' _
 KC       = _ !("\\") '}' _
@@ -63,7 +65,7 @@ DOT       = _ '.' _
 QUOTE     = _ ["] _
 
 HEAD_TAG = _ !("\\")'@head' _
-            
+
 TAG = _  !("\\") '@' id:$([a-zA-Z_][a-zA-Z_0-9-]*) _
     {
       return { type: 'TAG', value: id }; 
