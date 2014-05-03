@@ -36,15 +36,15 @@ scml = (function() {
         peg$c1 = null,
         peg$c2 = [],
         peg$c3 = function(h, b) {
-                   return {type: "document", head: (h? h : []), body: (b? b : [])};
+                   return {type: "document", head: h, body: (b? b : [])};
                  },
         peg$c4 = function(ht) {
-                     return (ht)? ht : [];
+                     return ht;
                    },
         peg$c5 = function() { return null; },
         peg$c6 = function(t) { return t; },
         peg$c7 = function(tag, p, t) {
-                             return {type: "head_block", tag: tag, parameters: (p? p : []), content: (t? t : "") };
+                             return {type: "block", tag: tag, parameters: p, content: t};
                            },
         peg$c8 = function(p) { return p; },
         peg$c9 = function(p, ps) {
@@ -63,7 +63,7 @@ scml = (function() {
         peg$c18 = function(clid) { return clid; },
         peg$c19 = function(content) { return content; },
         peg$c20 = function(tag, id, classes, p, body) {
-                return {type: "block", tag: tag, id: id, classes: (classes? classes : []), parameters: (p? p : []), content: body };
+                return {type: "block", tag: tag, id: id, classes: classes, parameters: p, content: body };
               },
         peg$c21 = void 0,
         peg$c22 = /^[^@}]/,

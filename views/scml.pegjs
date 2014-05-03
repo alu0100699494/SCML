@@ -1,16 +1,18 @@
+// REGLAS DE ANÁLISIS
+
 document = h:(block_head)? b:(block / text)*
          {
-           return {type: "document", head: (h? h : []), body: (b? b : [])};
+           return {type: "document", head: h, body: (b? b : [])};
          }
 
 block_head = HEAD_TAG KO ht:(sentence_head_tags)* KC
            {
-             return (ht)? ht : [];
+             return ht;
            }
              
 sentence_head_tags = tag:TAG p:(parameters)? t:( SEMICOLON { return null; } / (KO t:text KC { return t; }) )?
                    {
-                     return {type: "head_block", tag: tag, parameters: (p? p : []), content: (t? t : "") };
+                     return {type: "block", tag: tag, parameters: p, content: t};
                    }
                      
 parameters = PO p:parameter ps:(COMMA p:parameter { return p; })* PC
@@ -25,7 +27,7 @@ parameter = i:ID v:(':' QUOTE  $( ([^"\\] / "\\".)* ) QUOTE)?
 
 block =  tag:TAG id:ID? classes:(DOT clid:ID { return clid; })* p:(parameters)? body:(SEMICOLON { return null; } / (KO content:(block / text)+ KC { return content; } ))
       {
-        return {type: "block", tag: tag, id: id, classes: (classes? classes : []), parameters: (p? p : []), content: body };
+        return {type: "block", tag: tag, id: id, classes: classes, parameters: p, content: body };
       }
 
 text = t:(literal / $(!OPEN_LITERAL ( "\\". / [^@}] ) )+ )+
@@ -38,7 +40,8 @@ literal = OPEN_LITERAL l:$(!(CLOSE_LITERAL) . )* CLOSE_LITERAL
           return l;
         }
 
-// Blancos
+// TOKENS
+
 _       = COMMENT / [ \t\n\r]* COMMENT?
 
 COMMENT = "/*" ([*]!("/") / [^*])* "*/" _ /
