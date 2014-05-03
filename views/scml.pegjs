@@ -12,7 +12,7 @@ block_head = HEAD_TAG KO ht:(sentence_head_tags)* KC
              
 sentence_head_tags = tag:TAG p:(parameters)? t:( SEMICOLON { return null; } / (KO t:text KC { return t; }) )?
   {
-    return {type: "block", tag: tag.value, parameters: p, content: t};
+    return {type: "block", tag: tag.value, parameters: p, content: [t]};
   }
                      
 parameters = PO p:parameter ps:(COMMA p:parameter { return p; })* PC

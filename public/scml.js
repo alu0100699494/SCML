@@ -44,7 +44,7 @@ scml = (function() {
         peg$c5 = function() { return null; },
         peg$c6 = function(t) { return t; },
         peg$c7 = function(tag, p, t) {
-            return {type: "block", tag: tag.value, parameters: p, content: t};
+            return {type: "block", tag: tag.value, parameters: p, content: [t]};
           },
         peg$c8 = function(p) { return p; },
         peg$c9 = function(p, ps) {
