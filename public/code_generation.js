@@ -1,39 +1,44 @@
+// Adaptador para ser llamado por el usuario
+function generate_code (node) {
+  return gen_code(node, 0);
+}
+
 // Función que genera el código asociado a un nodo del AST. Delega la
 // generación del código a la función adecuada.
-function generate_code (node) {
+function gen_code (node, nest) {
   if (!node) return "";
 
   var code;
   switch (node.type) {
     case 'document':
-      code = generate_document_code(node);
+      code = gen_document_code(node);
       break;
     case 'block':
-      code = generate_block_code(node);
+      code = gen_block_code(node, nest);
       break;
     case 'text':
-      code = generate_text_code(node);
+      code = gen_text_code(node);
       break;
   }
 
   return code;
 }
 
-function generate_document_code (doc) {
+function gen_document_code (doc) {
   var code = '<!DOCTYPE html>\n<html>\n';
 
   // HEAD
   if (doc.head) {
     code += '<head>\n';
     for (var i in doc.head)
-      code += generate_code(doc.head[i]);
+      code += gen_code(doc.head[i], 1);
     code += '</head>\n';
   }
 
   // BODY
   code += '<body>\n';
   for (var i in doc.body)
-    code += generate_code(doc.body[i]);
+    code += gen_code(doc.body[i], 1);
   code += '</body>\n';
 
   code += '</html>';
@@ -41,8 +46,8 @@ function generate_document_code (doc) {
   return code;
 }
 
-function generate_block_code (block) {
-  var code = '<' + block.tag;
+function gen_block_code (block, nest) {
+  var code = ' '.repeat(nest*2) + '<' + block.tag;
 
   if (block.id)
     code += ' id="' + block.id + '"';
@@ -66,19 +71,25 @@ function generate_block_code (block) {
 
   code += '>';
 
+  var next_nest = 0;
   if (block.content) {
-    if (block.content.length > 1 || (block.content[0] && block.content[0].type != 'text'))
+    if (block.content.length > 1 || (block.content[0] && block.content[0].type != 'text')) {
       code += '\n';
+      next_nest = nest+1;
+    }
     for (var i in block.content)
-      code += generate_code(block.content[i]);
+      code += gen_code(block.content[i], next_nest);
   }
+
+  if (next_nest != 0)
+    code += ' '.repeat(nest*2);
 
   code += '</' + block.tag + '>\n';
 
   return code;
 }
 
-function generate_text_code (text) {
+function gen_text_code (text) {
   var code = '';
 
   if (text.content.length > 1) {
