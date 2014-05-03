@@ -21,9 +21,10 @@ parameters = PO p:parameter ps:(COMMA p:parameter { return p; })* PC
              return [p].concat( ps? ps : [] );
            }
              
-parameter = i:ID ':' QUOTE  v:$( ([^"\\] / "\\".)* ) QUOTE
+parameter = i:ID v:(':' QUOTE  $( ([^"\\] / "\\".)* ) QUOTE)?
           {
-            return {id: i, value: v};
+            console.log("ID = " + i.value);
+            return {id: i, value: v? v[2] : null};
           }
 
 block =  tag:TAG id:ID? classes:(DOT clid:ID { return clid; })* p:(parameters)? body:(SEMICOLON { return null; } / (KO content:(block / text)+ KC { return content; } ))
