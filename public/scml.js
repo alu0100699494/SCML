@@ -36,20 +36,20 @@ scml = (function() {
         peg$c1 = null,
         peg$c2 = [],
         peg$c3 = function(h, b) {
-                   return {type: "document", head: h, body: (b? b : [])};
-                 },
+            return {type: "document", head: h, body: (b? b : [])};
+          },
         peg$c4 = function(ht) {
-                     return ht;
-                   },
+            return ht;
+          },
         peg$c5 = function() { return null; },
         peg$c6 = function(t) { return t; },
         peg$c7 = function(tag, p, t) {
-                             return {type: "block", tag: tag, parameters: p, content: t};
-                           },
+            return {type: "block", tag: tag, parameters: p, content: t};
+          },
         peg$c8 = function(p) { return p; },
         peg$c9 = function(p, ps) {
-                     return [p].concat( ps? ps : [] );
-                   },
+            return [p].concat( ps? ps : [] );
+          },
         peg$c10 = ":",
         peg$c11 = { type: "literal", value: ":", description: "\":\"" },
         peg$c12 = /^[^"\\]/,
@@ -58,22 +58,22 @@ scml = (function() {
         peg$c15 = { type: "literal", value: "\\", description: "\"\\\\\"" },
         peg$c16 = { type: "any", description: "any character" },
         peg$c17 = function(i, v) {
-                    return {id: i, value: v? v[2] : null};
-                  },
+            return {id: i, value: v? v[2] : null};
+          },
         peg$c18 = function(clid) { return clid; },
         peg$c19 = function(content) { return content; },
         peg$c20 = function(tag, id, classes, p, body) {
-                return {type: "block", tag: tag, id: id, classes: classes, parameters: p, content: body };
-              },
+            return {type: "block", tag: tag, id: id, classes: classes, parameters: p, content: body };
+          },
         peg$c21 = void 0,
         peg$c22 = /^[^@}]/,
         peg$c23 = { type: "class", value: "[^@}]", description: "[^@}]" },
         peg$c24 = function(t) {
-               return {type: "text", content: t };
-             },
+            return {type: "text", content: t };
+          },
         peg$c25 = function(l) {
-                  return l;
-                },
+            return l;
+          },
         peg$c26 = /^[ \t\n\r]/,
         peg$c27 = { type: "class", value: "[ \\t\\n\\r]", description: "[ \\t\\n\\r]" },
         peg$c28 = "/*",
@@ -121,11 +121,11 @@ scml = (function() {
         peg$c70 = /^[a-zA-Z_0-9\-]/,
         peg$c71 = { type: "class", value: "[a-zA-Z_0-9\\-]", description: "[a-zA-Z_0-9\\-]" },
         peg$c72 = function(id) {
-              return { type: 'TAG', value: id }; 
-            },
+            return { type: 'TAG', value: id }; 
+          },
         peg$c73 = function(id) {
-             return { type: 'ID', value: id }; 
-           },
+            return { type: 'ID', value: id }; 
+          },
 
         peg$currPos          = 0,
         peg$reportedPos      = 0,
