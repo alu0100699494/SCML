@@ -1,4 +1,4 @@
-document = h:(block_head)? b:(block)*
+document = h:(block_head)? b:(block / text)*
          {
            return {type: "document", head: (h? h : []), body: (b? b : [])};
          }

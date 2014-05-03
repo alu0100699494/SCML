@@ -304,9 +304,15 @@ scml = (function() {
       if (s1 !== peg$FAILED) {
         s2 = [];
         s3 = peg$parseblock();
+        if (s3 === peg$FAILED) {
+          s3 = peg$parsetext();
+        }
         while (s3 !== peg$FAILED) {
           s2.push(s3);
           s3 = peg$parseblock();
+          if (s3 === peg$FAILED) {
+            s3 = peg$parsetext();
+          }
         }
         if (s2 !== peg$FAILED) {
           peg$reportedPos = s0;
