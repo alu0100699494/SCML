@@ -39,18 +39,15 @@ scml = (function() {
                    return {type: "document", head: (h? h : []), body: (b? b : [])};
                  },
         peg$c4 = function(ht) {
-                     console.log("Entramos en block_head");
                      return (ht)? ht : [];
                    },
         peg$c5 = function() { return null; },
         peg$c6 = function(t) { return t; },
         peg$c7 = function(tag, p, t) {
-                             console.log("sentence_head_tags");
                              return {type: "head_block", tag: tag, parameters: (p? p : []), content: (t? t : "") };
                            },
         peg$c8 = function(p) { return p; },
         peg$c9 = function(p, ps) {
-                     console.log("parameters");
                      return [p].concat( ps? ps : [] );
                    },
         peg$c10 = ":",
@@ -61,24 +58,20 @@ scml = (function() {
         peg$c15 = { type: "literal", value: "\\", description: "\"\\\\\"" },
         peg$c16 = { type: "any", description: "any character" },
         peg$c17 = function(i, v) {
-                    console.log("ID = " + i.value);
                     return {id: i, value: v? v[2] : null};
                   },
         peg$c18 = function(clid) { return clid; },
         peg$c19 = function(content) { return content; },
         peg$c20 = function(tag, id, classes, p, body) {
-                console.log("bloque :D -> Dani");
                 return {type: "block", tag: tag, id: id, classes: (classes? classes : []), parameters: (p? p : []), content: body };
               },
         peg$c21 = void 0,
         peg$c22 = /^[^@}]/,
         peg$c23 = { type: "class", value: "[^@}]", description: "[^@}]" },
         peg$c24 = function(t) {
-               console.log("text :D -> Sergio");
                return {type: "text", content: t };
              },
         peg$c25 = function(l) {
-                  console.log("literal :D -> Cristo");
                   return l;
                 },
         peg$c26 = /^[ \t\n\r]/,
