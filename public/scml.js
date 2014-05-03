@@ -44,7 +44,7 @@ scml = (function() {
         peg$c5 = function() { return null; },
         peg$c6 = function(t) { return t; },
         peg$c7 = function(tag, p, t) {
-            return {type: "block", tag: tag, parameters: p, content: t};
+            return {type: "block", tag: tag.value, parameters: p, content: t};
           },
         peg$c8 = function(p) { return p; },
         peg$c9 = function(p, ps) {
@@ -58,12 +58,12 @@ scml = (function() {
         peg$c15 = { type: "literal", value: "\\", description: "\"\\\\\"" },
         peg$c16 = { type: "any", description: "any character" },
         peg$c17 = function(i, v) {
-            return {id: i, value: v? v[2] : null};
+            return {id: i.value, value: v? v[2] : null};
           },
-        peg$c18 = function(clid) { return clid; },
+        peg$c18 = function(clid) { return { id: clid.value }; },
         peg$c19 = function(content) { return content; },
         peg$c20 = function(tag, id, classes, p, body) {
-            return {type: "block", tag: tag, id: id, classes: classes, parameters: p, content: body };
+            return {type: "block", tag: tag.value, id: (id? id.value : null), classes: (classes.length>0? classes : null), parameters: p, content: body };
           },
         peg$c21 = void 0,
         peg$c22 = /^[^@}]/,

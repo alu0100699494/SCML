@@ -12,7 +12,7 @@ block_head = HEAD_TAG KO ht:(sentence_head_tags)* KC
              
 sentence_head_tags = tag:TAG p:(parameters)? t:( SEMICOLON { return null; } / (KO t:text KC { return t; }) )?
   {
-    return {type: "block", tag: tag, parameters: p, content: t};
+    return {type: "block", tag: tag.value, parameters: p, content: t};
   }
                      
 parameters = PO p:parameter ps:(COMMA p:parameter { return p; })* PC
@@ -22,12 +22,12 @@ parameters = PO p:parameter ps:(COMMA p:parameter { return p; })* PC
              
 parameter = i:ID v:(':' QUOTE  $( ([^"\\] / "\\".)* ) QUOTE)?
   {
-    return {id: i, value: v? v[2] : null};
+    return {id: i.value, value: v? v[2] : null};
   }
 
-block =  tag:TAG id:ID? classes:(DOT clid:ID { return clid; })* p:(parameters)? body:(SEMICOLON { return null; } / (KO content:(block / text)+ KC { return content; } ))
+block =  tag:TAG id:ID? classes:(DOT clid:ID { return { id: clid.value }; })* p:(parameters)? body:(SEMICOLON { return null; } / (KO content:(block / text)+ KC { return content; } ))
   {
-    return {type: "block", tag: tag, id: id, classes: classes, parameters: p, content: body };
+    return {type: "block", tag: tag.value, id: (id? id.value : null), classes: (classes.length>0? classes : null), parameters: p, content: body };
   }
 
 text = t:(literal / $(!OPEN_LITERAL ( "\\". / [^@}] ) )+ )+
