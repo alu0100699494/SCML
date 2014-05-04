@@ -29,7 +29,7 @@
           <span class="element-divider"></span>
           <a class="element brand" href="https://github.com/alu0100699494/SCML" title="Repo">Repositorio GitHub <span class="icon-github-2"></span></a>
 
-          <!-- Si el usuario está autenticado, usar su nombre e imagen para indicarlo -->
+          <!--
           <% if session[:auth] %>
             <div class="element place-right bg-red">
               <a class="fg-white" href="/logout"><span class="icon-cancel-2"></span> Salir </a>
@@ -39,7 +39,6 @@
               <a href="<%= session[:url] %>" target="_blank"><%= session[:name] %></a>
               <img src="<%= session[:image] %>">  
             </button>
-          <!-- Si no, poner el menú de autenticación -->
           <% else %>
             <div class="element place-right bg-green">
               <a class="dropdown-toggle" href="#"><span class="icon-checkmark"></span> Iniciar sesión </a>
@@ -49,6 +48,7 @@
               </ul> 
             </div>
           <% end %>
+          -->
       </nav>
     </nav>
   </header>

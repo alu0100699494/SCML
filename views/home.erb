@@ -1,49 +1,48 @@
 <div class="center_page grid">
   <div class="row">
-    <div class="span10 offset1"> <h1>Structured C Markup Language</h1></div>
+    <div class="span12"> <h1>Structured C Markup Language</h1></div>
   </div>
   
   <div class="row">
     <!--<div class="span10 offset1"> <p class="loadfile"> <input type="file" id="examples" /> </p> </div>  -->
-    <div class="span7 offset1">
+    <div class="span7">
       Cargar fichero <div class="input-control file"> <input type="file" id="examples" /> <button class="btn-file"></button> </div>
     </div> 
   </div>
   
   <div class="row">
-    <div class="span5 offset1">
+    <div class="span6">
       <div class="panel">
         <div class="panel-header bg-dark fg-white">
           Código <strong>SCML</strong>
         </div>
         <div class="panel-content">
-          <textarea id="input" name="input"  autofocus cols = "40" rows = "4">
-          </textarea>
+          <textarea id="input" name="input"  autofocus cols = "40" rows = "4"></textarea>
+        </div>
+        <div class="panel-content">
+          <button id="parse" type="button" class="success">Traducir</button>
         </div>
       </div>
     </div>
-	<div class="span5">
+	<div class="span6">
 	  <div class="panel">
         <div class="panel-header bg-dark fg-white">
           Código <strong>HTML</strong> generado
         </div>
         <div class="panel-content">
-          <textarea id="html_output" name="input"  autofocus cols = "40" rows = "4">
-          </textarea>
+          <textarea id="html_output" name="input"  autofocus cols = "40" rows = "4"></textarea>
+        </div>
+        <div class="panel-content">
+          <button id="parse" type="button" class="info">Descargar HTML</button>
         </div>
       </div>
-
     </div>
   </div>
   
-  <div class="row">
-    <div class="span2 offset1"> 
-      <button id="parse" type="button" class="success">Traducir</button>
-    </div>
-  </div>
+
 
   <div class="row">
-    <div class="span10 offset1">
+    <div class="span12">
       <div class="panel">
         <div class="panel-header bg-dark fg-white">
           Árbol AST generado
