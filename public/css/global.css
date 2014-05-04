@@ -56,3 +56,10 @@ p.subtext{
   display: inline-block;
   float: left;
 }
+
+.center_page{
+  display: block;
+  width: 950px;
+  margin-left: auto;
+  margin-right: auto;
+}
