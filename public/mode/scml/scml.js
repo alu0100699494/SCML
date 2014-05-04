@@ -118,7 +118,7 @@ CodeMirror.defineMode("scml", function(config, parserConfig) {
       {
         if (stream.eatSpace())
           return null;
-        else if(stream.match(/(?!\\)@head/, true))  // Cazar con @head
+        else if(stream.match(/(?!\\)@head(?=[\s{;])/, true))  // Cazar con @head
           return "keyword-head";
         else if(stream.match( /(?!\\)@[a-zA-Z_][a-zA-Z_0-9]*/, true )) // Cazar con cualquier tag
         {
