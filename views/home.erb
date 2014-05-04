@@ -17,7 +17,7 @@
           Código <strong>SCML</strong>
         </div>
         <div class="panel-content">
-          <textarea id="input" name="input"  autofocus cols = "40" rows = "4"></textarea>
+          <textarea id="input" name="input"  autofocus cols = "40" rows = "4">var a = 6*6 + b;</textarea>
         </div>
         <div class="panel-content">
           <button id="parse" type="button" class="success">Traducir</button>
@@ -30,10 +30,10 @@
           Código <strong>HTML</strong> generado
         </div>
         <div class="panel-content">
-          <textarea id="html_output" name="input"  autofocus cols = "40" rows = "4"></textarea>
+          <textarea id="html_output" name="input"  autofocus cols = "40" rows = "4">&lt;img src="pepe"/&gt;</textarea>
         </div>
         <div class="panel-content">
-          <button id="parse" type="button" class="info">Descargar HTML</button>
+          <button id="download" type="button" class="info">Descargar HTML</button>
         </div>
       </div>
     </div>
@@ -57,15 +57,17 @@
 
 <script>
     // Generar un editor CodeMirror a partir del textarea INPUT (se borra y se reemplaza).
-    var editor = CodeMirror.fromTextArea(document.getElementById("input"), {
-      lineNumbers: true,
-      viewportMargin: Infinity
-    });
-	
-	var editor = CodeMirror.fromTextArea(document.getElementById("html_output"), {
+    var editor1 = CodeMirror.fromTextArea(document.getElementById("input"), {
       lineNumbers: true,
       viewportMargin: Infinity,
-	  readOnly: true
+      mode: "text/javascript"
+    });
+	
+	var editor2 = CodeMirror.fromTextArea(document.getElementById("html_output"), {
+      lineNumbers: true,
+      viewportMargin: Infinity,
+	    readOnly: true,
+      mode: "text/html"
     });
 </script>
 
