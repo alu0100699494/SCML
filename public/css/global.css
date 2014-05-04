@@ -63,3 +63,10 @@ p.subtext{
   margin-left: auto;
   margin-right: auto;
 }
+
+/* CodeMirror  */
+.cm-keyword-head{ color: red; font-weight: bold; }
+.cm-literal{ color: green; font-weight: bold; }
+.cm-class{ color: #ffb400;  }
+.cm-attrib_value { color: #009f99 ;}
+.cm-attrib { color: #00e0d8 ;}

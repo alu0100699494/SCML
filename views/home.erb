@@ -59,8 +59,9 @@
     // Generar un editor CodeMirror a partir del textarea INPUT (se borra y se reemplaza).
     var editor1 = CodeMirror.fromTextArea(document.getElementById("input"), {
       lineNumbers: true,
+      theme: "neat",
       viewportMargin: Infinity,
-      mode: "text/javascript"
+      mode: "text/scml"
     });
 	
 	var editor2 = CodeMirror.fromTextArea(document.getElementById("html_output"), {
