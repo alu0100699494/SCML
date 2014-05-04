@@ -28,9 +28,9 @@
     <header>
       <nav class="navigation-bar dark">
         <nav class="navigation-bar-content">
-          <a class="element brand" href="/home"  title="Home">Home</a>
-          <a class="element brand" href="/grammar"  title="Gramática">Gramática</a>
-          <a class="element brand" href="/test" title="Pruebas">Pruebas</a>
+          <a class="element brand<%= current?("/home")? " bg-gray" : "" %>" href="/home"  title="Home">Home</a>
+          <a class="element brand<%= current?("/grammar")? " bg-gray" :  "" %>" href="/grammar"  title="Gramática">Gramática</a>
+          <a class="element brand<%= current?("/test")? " bg-gray" : "" %>" href="/test" title="Pruebas">Pruebas</a>
           <a class="element brand" href="https://github.com/alu0100699494/SCML/wiki" title="Documentación">Documentación</a>
           <span class="element-divider"></span>
           <a class="element brand" href="https://github.com/alu0100699494/SCML" title="Repo">Repositorio GitHub <span class="icon-github-2"></span></a>

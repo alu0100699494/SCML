@@ -3,7 +3,7 @@ require "sinatra/reloader" if development?
 
 helpers do
   def current?(path='/')
-    (request.path==path || request.path==path+'/') ? 'class = "current"' : ''
+    (request.path==path || request.path==path+'/') ? true : false
   end
 end
 
