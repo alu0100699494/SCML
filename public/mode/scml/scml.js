@@ -46,7 +46,12 @@ CodeMirror.defineMode("scml", function(config, parserConfig) {
         else if(stream.match(/[a-zA-Z_][a-zA-Z_0-9]*/, true))
         {
           state.context = "after_id";
-          return "builtin"
+          return "builtin";
+        }
+        else if(stream.match(/[/][*]/))
+        {
+          while(!stream.match(/[*][/]/) && stream.next() != null );
+          return "comment";
         }
         else
         {
@@ -61,6 +66,11 @@ CodeMirror.defineMode("scml", function(config, parserConfig) {
         else if( stream.match(/[.][a-zA-Z_][a-zA-Z_0-9]*/, true) )
         {
           return "class"
+        }
+        else if(stream.match(/[/][*]/))
+        {
+          while(!stream.match(/[*][/]/) && stream.next() != null );
+          return "comment";
         }
         else
         {
@@ -77,6 +87,11 @@ CodeMirror.defineMode("scml", function(config, parserConfig) {
         {
           state.context = "in_parenthesis";
           return null;
+        }
+        else if(stream.match(/[/][*]/))
+        {
+          while(!stream.match(/[*][/]/) && stream.next() != null );
+          return "comment";
         }
         else
         {
@@ -108,6 +123,11 @@ CodeMirror.defineMode("scml", function(config, parserConfig) {
           state.context = "none";
           return null;
         }
+        else if(stream.match(/[/][*]/))
+        {
+          while(!stream.match(/[*][/]/) && stream.next() != null );
+          return "comment";
+        }
         else
         {
           state.context = "none";
@@ -129,6 +149,11 @@ CodeMirror.defineMode("scml", function(config, parserConfig) {
         {
           state.context = "in_literal";
           return "literal";
+        }
+        else if(stream.match(/[/][*]/))
+        {
+          while(!stream.match(/[*][/]/) && stream.next() != null );
+          return "comment";
         }
         else {
           stream.next()
