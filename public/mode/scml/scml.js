@@ -53,6 +53,11 @@ CodeMirror.defineMode("scml", function(config, parserConfig) {
           while(!stream.match(/[*][/]/) && stream.next() != null );
           return "comment";
         }
+        else if(stream.match(/[/][/]/))
+        {
+          stream.skipToEnd();
+          return "comment";
+        }
         else
         {
           state.context = "after_id";
@@ -70,6 +75,11 @@ CodeMirror.defineMode("scml", function(config, parserConfig) {
         else if(stream.match(/[/][*]/))
         {
           while(!stream.match(/[*][/]/) && stream.next() != null );
+          return "comment";
+        }
+        else if(stream.match(/[/][/]/))
+        {
+          stream.skipToEnd();
           return "comment";
         }
         else
@@ -91,6 +101,11 @@ CodeMirror.defineMode("scml", function(config, parserConfig) {
         else if(stream.match(/[/][*]/))
         {
           while(!stream.match(/[*][/]/) && stream.next() != null );
+          return "comment";
+        }
+        else if(stream.match(/[/][/]/))
+        {
+          stream.skipToEnd();
           return "comment";
         }
         else
@@ -128,6 +143,11 @@ CodeMirror.defineMode("scml", function(config, parserConfig) {
           while(!stream.match(/[*][/]/) && stream.next() != null );
           return "comment";
         }
+        else if(stream.match(/[/][/]/))
+        {
+          stream.skipToEnd();
+          return "comment";
+        }
         else
         {
           state.context = "none";
@@ -153,6 +173,11 @@ CodeMirror.defineMode("scml", function(config, parserConfig) {
         else if(stream.match(/[/][*]/))
         {
           while(!stream.match(/[*][/]/) && stream.next() != null );
+          return "comment";
+        }
+        else if(stream.match(/[/][/]/))
+        {
+          stream.skipToEnd();
           return "comment";
         }
         else {
