@@ -29,7 +29,9 @@ $(document).ready(function() {
     r.onload = function(e) { 
       var contents = e.target.result;
       
-      input.innerHTML = contents;
+      //input.innerHTML = contents;
+	  var editor = $('.CodeMirror')[0].CodeMirror;
+	  editor.setValue(contents);
     }
     r.readAsText(f);
   });
