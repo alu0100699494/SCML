@@ -56,6 +56,7 @@ function gen_block_code (block, nest) {
     code += ' class="';
     for (var i in block.classes)
       code += block.classes[i].id + ' ';
+
     code = code.slice(0, -1);
     code += '"';
   }
@@ -65,7 +66,7 @@ function gen_block_code (block, nest) {
       code += ' ' + block.parameters[i].id;
 
       if (block.parameters[i].value)
-        code += '="' + block.parameters[i].value + '"';
+        code += '="' + escape_entities(block.parameters[i].value) + '"';
     }
   }
 
@@ -99,5 +100,16 @@ function gen_text_code (text) {
   else
     code += text.content[0];
 
-  return code;
+  return escape_entities(code);
+}
+
+function escape_entities (str) {
+  var entities = {
+   '<': '&lt;',
+   '>': '&gt;',
+   '"': '&quot;',
+   "'": '&apos;'
+  };
+
+  return str.replace(/\\/g, '').replace(/[<>"']/g, function(tag) { return entities[tag] || tag; });
 }
