@@ -12,17 +12,6 @@ $(document).ready(function() {
       var result = generate_code(tree);
       var html_output = $('.CodeMirror')[1].CodeMirror;
       
-      // mostrar para codemirror
-      var entities = {
-        '&lt;': '<',
-        '&gt;': '>',
-        '&quot;': '"',
-        '&apos;': "'",
-        '&amp;': '&'
-      };
-
-      result = result.replace(/\\/g, '').replace(/(&lt;|&gt;|&quot;|&apos;|&amp;)/g, function(tag) { return entities[tag] || tag; })
-      
 	    html_output.setValue(result);
       
       //$('#output').text(result);
