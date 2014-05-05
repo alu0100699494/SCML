@@ -120,8 +120,9 @@ function escape_entities (str) {
    '<': '&lt;',
    '>': '&gt;',
    '"': '&quot;',
-   "'": '&apos;'
+   "'": '&apos;',
+   '&': '&amp'
   };
 
-  return str.replace(/\\/g, '').replace(/[<>"']/g, function(tag) { return entities[tag] || tag; });
+  return str.replace(/\\/g, '').replace(/[<>"'&]/g, function(tag) { return entities[tag] || tag; });
 }
