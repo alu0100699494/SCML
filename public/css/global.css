@@ -64,6 +64,11 @@ p.subtext{
   margin-right: auto;
 }
 
+div.error                       { display: inline-block; background-color: #ff9a9a; transition:.3s; border-radius: 10px 10px 10px 10px; padding: 15px 15px 15px 15px; color:white; font-weight: bold; }
+div.error:hover                 { background-color: #ff0000; transition:.3s; }
+div.error span                  { color: black; transition:.3s; }
+div.error:hover span            { color: white; transition:.3s; }
+
 /* CodeMirror  */
 .cm-keyword-head{ color: red; font-weight: bold; }
 .cm-literal{ color: green; font-weight: bold; }
