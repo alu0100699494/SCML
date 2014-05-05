@@ -6,7 +6,7 @@ $(document).ready(function() {
     try {
      // Generar y mostrar el árbol
       var tree = scml.parse(source);
-      $('#output').html(JSON.stringify(tree,undefined,2));
+      $('#output').text(JSON.stringify(tree,undefined,2));
       
       // Generar y mostrar el código
       var result = generate_code(tree);
