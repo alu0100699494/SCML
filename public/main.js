@@ -17,7 +17,8 @@ $(document).ready(function() {
         '&lt;': '<',
         '&gt;': '>',
         '&quot;': '"',
-        '&apos;': "'"
+        '&apos;': "'",
+        '&amp;': '&'
       };
 
       result = result.replace(/\\/g, '').replace(/(&lt;|&gt;|&quot;|&apos;|&amp;)/g, function(tag) { return entities[tag] || tag; })
