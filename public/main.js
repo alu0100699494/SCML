@@ -4,19 +4,20 @@ $(document).ready(function() {
 	  var source = editor.getValue();
     
     try {
+     // Generar y mostrar el árbol
       var tree = scml.parse(source);
-      var result = generate_code(tree);
-      // Mostrar el árbol
       $('#output').html(JSON.stringify(tree,undefined,2));
-      // Mostrar el código
-       var html_output = $('.CodeMirror')[1].CodeMirror;
-	     editor.setValue(result);
+      
+      // Generar y mostrar el código
+      var result = generate_code(tree);
+      var html_output = $('.CodeMirror')[1].CodeMirror;
+	    html_output.setValue(result);
       
       //$('#output').text(result);
       //$('#output').html(JSON.stringify(tree,undefined,2));
 
     } catch (e) {
-      $('#output').html('<div class="error"><pre>\n' + String(e) + '\n</pre></div>');
+      //$('#output').html('<div class="error"><pre>\n' + String(e) + '\n</pre></div>');
     }
   });
   
