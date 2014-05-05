@@ -17,7 +17,7 @@ $(document).ready(function() {
       //$('#output').html(JSON.stringify(tree,undefined,2));
 
     } catch (e) {
-      //$('#output').html('<div class="error"><pre>\n' + String(e) + '\n</pre></div>');
+      $('#output').html('<div class="error"><pre>\n' + String(e) + '\n</pre></div>');
     }
   });
   
