@@ -15,6 +15,7 @@
 CodeMirror.defineMode("scml", function(config, parserConfig) {
   var indentUnit = config.indentUnit;
   
+  
   var ID = new RegExp("[a-zA-Z_][a-zA-Z_0-9]*");
   var TAG = new RegExp("@[a-zA-Z_][a-zA-Z_0-9]*");
 
@@ -26,6 +27,14 @@ CodeMirror.defineMode("scml", function(config, parserConfig) {
     },
     
     token: function(stream, state) {
+      function getAllMethods(object) {
+        return Object.getOwnPropertyNames(object).filter(function(property) {
+          return typeof object[property] == 'function';
+        });
+      }
+
+      console.log(stream);
+    
       if(state.context == "in_literal")
       {
         if(stream.match("<(\")"))
@@ -43,7 +52,7 @@ CodeMirror.defineMode("scml", function(config, parserConfig) {
       {
         if (stream.eatSpace())
           return null;
-        else if(stream.match(/[a-zA-Z_][a-zA-Z_0-9]*/, true))
+        else if(stream.match(/[a-zA-Z_][\-a-zA-Z_0-9]*/, true))
         {
           state.context = "after_id";
           return "builtin";
@@ -68,7 +77,7 @@ CodeMirror.defineMode("scml", function(config, parserConfig) {
       {
         if (stream.eatSpace())
           return null;
-        else if( stream.match(/[.][a-zA-Z_][a-zA-Z_0-9]*/, true) )
+        else if( stream.match(/[.]\s*[a-zA-Z_][\-a-zA-Z_0-9]*/, true) )
         {
           return "class"
         }
@@ -107,6 +116,12 @@ CodeMirror.defineMode("scml", function(config, parserConfig) {
         {
           stream.skipToEnd();
           return "comment";
+        }
+        else if(stream.match(/{/))
+        {
+          //stream.skipToEnd();
+          state.context = "none";
+          return null;
         }
         else
         {
@@ -160,7 +175,7 @@ CodeMirror.defineMode("scml", function(config, parserConfig) {
           return null;
         else if(stream.match(/(?!\\)@head(?=[\s{;])/, true))  // Cazar con @head
           return "keyword-head";
-        else if(stream.match( /(?!\\)@[a-zA-Z_][a-zA-Z_0-9]*/, true )) // Cazar con cualquier tag
+        else if(stream.match( /(?!\\)@[a-zA-Z_][\-a-zA-Z_0-9]*/, true )) // Cazar con cualquier tag
         {
           state.context = "after_tag"
           return "keyword";
