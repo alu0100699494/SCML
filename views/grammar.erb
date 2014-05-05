@@ -6,54 +6,46 @@
   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-<br>
-Recuerde que un PEG $G$ es una cuaterna $G =(\Sigma,V,P,S)$.
-<ol>
-  <li>$\Sigma$ es el conjunto de terminales. 
-  <li>$V$ es un conjunto (disjunto de $\Sigma$) que se denomina conjunto de 
-      <i>símbolos no terminales</i>,
-      <i>variables sintácticas</i> o <i>categorías gramáticales</i>,
-  <li>$P$ es un conjunto de pares de $V \times (V \cup \Sigma )^*$. En vez de escribir
-  un par usando la notación $(A, \alpha) \in P$ se escribe $A \leftarrow \alpha$.
-  Un elemento de $P$ se denomina <i>regla de análisis</i>. 
-  <li>Por último, $S$ es un símbolo del conjunto
-  $V$ que se denomina <i>expresión de arranque</i>.
-</ol>
-<ol>
-  <li> $\Sigma = \{ if, then, else, =, +, -, *, /, (, ), 0 \ldots 9 \}$, 
-  <li> $V = \{ st, exp, term, factor \} \cup$ <br />
-  $\{ASSIGN, ADD, MUL, LEFTPAR, RIGHTPAR \} \cup$ <br />
-  $\{IF, THEN, ELSE, ID, NUMBER, \_ \}$
-  <li> Reglas de Análisis:
-  <ol>
-<pre>
-st     = ID ASSIGN exp
-       / IF exp THEN st ELSE st
-       / IF exp THEN st
-exp    = term   (ADD term)*
-term   = factor (MUL factor)*
-
-factor = NUMBER
-       / ID
-       / LEFTPAR exp RIGHTPAR
-
-_ = $[ \t\n\r]*
-
-ASSIGN   = _ '=' _
-ADD      = _ [+-] _
-MUL      = _ [*/] _
-LEFTPAR  = _"("_
-RIGHTPAR = _")"_
-IF       = _ "if" _
-THEN     = _ "then" _
-ELSE     = _ "else" _
-ID       = _ [a-zA-Z_][a-zA-Z_0-9]* _
-NUMBER   = _ [0-9]+ _
-</pre>
-  </ol>
-  <li> Expresión de arranque: $st$
-</ol>
-<BR>
-<BR>
-<BR>
+<div class="grid">
+  <div class="row">
+    <div class="span10 offset1"> 
+      Recuerde que una gramática $G$ es una cuaterna $G =(\Sigma,V,P,S)$.
+    </div>
+  </div>
+  <div class="row">
+    <div class="span10 offset1"> 
+      <ol>
+        <li>$\Sigma$ es el conjunto de terminales. 
+        <li>$V$ es un conjunto (disjunto de $\Sigma$) que se denomina conjunto de <i>variables sintácticas</i> o <i>categorías gramáticales</i>,
+        <li>$P$ es un conjunto de pares de $V \times (V \cup \Sigma )^*$. En vez de escribir
+        un par usando la notación $(A, \alpha) \in P$ se escribe $A \rightarrow \alpha$.
+        Un elemento de $P$ se denomina producción. 
+        <li>Por último, $S$ es un símbolo del conjunto
+        $V$ que se denomina símbolo de arranque.
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span10 offset1"> 
+      <ol>
+        <li> $\Sigma = \{$ {, }, (")>, <("), (, ), ,, ;, ., ", @, @head $\}$,
+        <li> $V = \{ document, block\_head, sentence\_head\_tags, parameters, parameter, $<br />$ block, text, literal, ID, TAG \}$
+        <li> Reglas de producción:
+          <ol>
+            <li>$document \rightarrow block\_head)? (block | text)*$
+            <li>$block\_head \rightarrow '@head' '\{' (sentence\_head\_tags) '\}'$
+            <li>$sentence\_head\_tags \rightarrow TAG (parameters)? ( ';' | ('\{' text '\}' ) )?$
+            <li>$parameters \rightarrow '(`' parameter ("," parameter )* ')'$
+            <li>$parameter \rightarrow ID (':' '"'  ( ([\hat{}"\backslash] | ' \backslash '.)* ) '"')?$
+            <li>$block \rightarrow  TAG ID? ('.' ID )* parameters? (';' | ('\{' (block | text)+ '\}' ))$
+            <li>$text \rightarrow (literal | (!'(")>' ( '\backslash'. / [\hat{} @\}] ) )+ )+$
+            <li>$literal \rightarrow '(")>' (!('<(")') . )* '<(")'$
+            <li>$ID \rightarrow [a-zA-Z\backslash][a-zA-Z\_0-9-]*$
+            <li>$TAG \rightarrow '@' ID$
+          </ol>
+        <li> Expresión de arranque: $document$
+      </ol>
+    </div>
+  </div>
+</div>
 
