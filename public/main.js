@@ -1,8 +1,10 @@
 $(document).ready(function() {
   $('#parse').click(function() {
     try {
-      var result = pl0.parse($('#input').val());
-      $('#output').html(JSON.stringify(result,undefined,2));
+      var tree = scml.parse($('#input').val());
+      var result = generate_code(tree);
+      $('#output').text(result);
+      //$('#output').html(JSON.stringify(tree,undefined,2));
     } catch (e) {
       $('#output').html('<div class="error"><pre>\n' + String(e) + '\n</pre></div>');
     }
@@ -20,6 +22,3 @@ $(document).ready(function() {
   });
 
 });
-
-  
-

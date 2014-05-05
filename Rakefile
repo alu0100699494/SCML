@@ -1,13 +1,13 @@
 task :default => :web
 
-desc "Compile pl0.pegjs browser version"
+desc "Compile scml.pegjs browser version"
 task :web do
-  sh "pegjs -e pl0 views/pl0.pegjs public/pl0.js"
+  sh "pegjs -e scml views/scml.pegjs public/scml.js"
 end
 
-desc "Remove pl0.pegjs"
+desc "Remove scml.pegjs"
 task :clean do
-  sh "rm -f public/pl0.js"
+  sh "rm -f public/scml.js"
 end
 
 desc "Compile public/styles.scss into public/styles.css using sass"
