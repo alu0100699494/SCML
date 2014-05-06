@@ -30,14 +30,19 @@ block =  tag:TAG id:ID? classes:(DOT clid:ID { return { id: clid.value }; })* p:
     return {type: "block", tag: tag.value, id: (id? id.value : null), classes: (classes.length>0? classes : null), parameters: p, content: body };
   }
 
-text = t:(literal / $(!OPEN_LITERAL ( "\\". / [^@}] ) )+ )+
+text = t:(raw_literal / literal)+
   {
     return {type: "text", content: t };
   }
 
-literal = OPEN_LITERAL l:$(!(CLOSE_LITERAL) . )* CLOSE_LITERAL 
+literal = l:$(!OPEN_LITERAL ( "\\". / [^@}] ) )+
   {
-    return l;
+    return {type: "literal", content: l};
+  }
+
+raw_literal = OPEN_LITERAL l:$(!(CLOSE_LITERAL) . )* CLOSE_LITERAL 
+  {
+    return {type: "raw_literal", content: l};
   }
 
 // TOKENS

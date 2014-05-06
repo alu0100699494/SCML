@@ -106,13 +106,22 @@ function gen_text_code (text) {
   var code = '';
 
   if (text.content.length > 1) {
-    for (var i in text.content)
-      code += text.content[i] + '\n';
+    for (var i in text.content) {
+      if (text.content[i].type == 'literal')
+        code += escape_entities(text.content[i].content);
+      else if (text.content[i].type == 'raw_literal')
+        code += text.content[i].content;
+      code += '\n';
+    }
   }
-  else
-    code += text.content[0];
+  else {
+    if (text.content[0].type == 'literal')
+      code += escape_entities(text.content[0].content);
+    else if (text.content[0].type == 'raw_literal')
+      code += text.content[0].content;
+  }
 
-  return escape_entities(code);
+  return code;
 }
 
 function escape_entities (str) {
