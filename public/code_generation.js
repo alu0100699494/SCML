@@ -51,6 +51,9 @@ function gen_document_code (doc) {
   code += '<body>\n';
   for (var i in doc.body)
     code += gen_code(doc.body[i], 1);
+
+  if (doc.body.length == 1 && doc.body[0].type == 'text')
+    code += '\n';
   code += '</body>\n';
 
   code += '</html>';
@@ -357,12 +360,11 @@ function escape_entities (str) {
 
   for (var i = 0; i < str.length; ++i) {
     if (entities.hasOwnProperty(str[i])){
-      ent = entities[str[i]];
+      var ent = entities[str[i]];
       str = str.substr(0, i) + ent + str.substr(i+1);
       i += ent.length-1;
     }
   }
-  return str;
 
-  //return str.replace(/\\/g, '').replace(/[<>"']/g, function(tag) { return entities[tag] || tag; });
+  return str.replace(/\\(?!\\)/g, '').replace(/[\s\n\r]*$/, '');
 }
