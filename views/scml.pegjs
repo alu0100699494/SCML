@@ -69,7 +69,7 @@ QUOTE         = _ ["] _
 
 HEAD_TAG  = _ !("\\")'@head' _
 
-TAG       = _  !("\\") '@' !("head"("\\s"/[.;{])) id:$([a-zA-Z_][a-zA-Z_0-9-]*) _
+TAG       = _  !("\\") '@' !("head"([ \t\n\r.;({])) id:$([a-zA-Z_][a-zA-Z_0-9-]*) _
   {
     return { type: 'TAG', value: id }; 
   }
