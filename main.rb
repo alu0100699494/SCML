@@ -19,3 +19,6 @@ get '/grammar' do
   erb :grammar
 end
 
+get '/test' do
+  erb :test
+end

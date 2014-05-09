@@ -38,8 +38,8 @@ $(document).ready(function() {
       var contents = e.target.result;
       
       //input.innerHTML = contents;
-	  var editor = $('.CodeMirror')[0].CodeMirror;
-	  editor.setValue(contents);
+      var editor = $('.CodeMirror')[0].CodeMirror;
+      editor.setValue(contents);
     }
     r.readAsText(f);
   });
