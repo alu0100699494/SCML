@@ -1,3 +1,10 @@
+// CÓDIGO DE APOYO
+{
+  function removeComments (str) {
+    return str.replace(/[/][*](.|[\r\n])*?[*][/]/g, '').replace(/[/][/].*/, '');
+  }
+}
+
 // REGLAS DE ANÁLISIS
 
 document = h:(block_head)? b:(block / text)*
@@ -9,17 +16,17 @@ block_head = HEAD_TAG KO ht:(sentence_head_tags)* KC
   {
     return ht;
   }
-             
+
 sentence_head_tags = tag:TAG p:(parameters)? t:( SEMICOLON { return null; } / (KO t:text KC { return t; }) )?
   {
     return {type: "block", tag: tag.value, parameters: p, content: [t]};
   }
-                     
+
 parameters = PO p:parameter ps:(COMMA p:parameter { return p; })* PC
   {
     return [p].concat( ps? ps : [] );
   }
-             
+
 parameter = i:ID v:(':' QUOTE  $( ([^"\\] / "\\".)* ) QUOTE)?
   {
     return {id: i.value, value: v? v[2] : null};
@@ -37,12 +44,12 @@ text = t:(raw_literal / literal)+
 
 literal = l:$(!OPEN_LITERAL ( "\\". / [^@}] ) )+
   {
-    return {type: "literal", content: l};
+    return {type: "literal", content: removeComments(l) };
   }
 
-raw_literal = OPEN_LITERAL l:$(!(CLOSE_LITERAL) . )* CLOSE_LITERAL 
+raw_literal = OPEN_LITERAL l:$(!(CLOSE_LITERAL) . )* CLOSE_LITERAL
   {
-    return {type: "raw_literal", content: l};
+    return {type: "raw_literal", content: l };
   }
 
 // TOKENS
@@ -71,10 +78,10 @@ HEAD_TAG  = _ !("\\")'@head' _
 
 TAG       = _  !("\\") '@' !("head"([ \t\n\r.;({])) id:$([a-zA-Z_][a-zA-Z_0-9-]*) _
   {
-    return { type: 'TAG', value: id }; 
+    return { type: 'TAG', value: id };
   }
 
 ID        = _ id:$([a-zA-Z_][a-zA-Z_0-9-]*) _
   {
-    return { type: 'ID', value: id }; 
+    return { type: 'ID', value: id };
   }

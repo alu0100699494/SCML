@@ -72,10 +72,10 @@ scml = (function() {
         peg$c23 = /^[^@}]/,
         peg$c24 = { type: "class", value: "[^@}]", description: "[^@}]" },
         peg$c25 = function(l) {
-            return {type: "literal", content: l};
+            return {type: "literal", content: removeComments(l) };
           },
         peg$c26 = function(l) {
-            return {type: "raw_literal", content: l};
+            return {type: "raw_literal", content: l };
           },
         peg$c27 = /^[ \t\n\r]/,
         peg$c28 = { type: "class", value: "[ \\t\\n\\r]", description: "[ \\t\\n\\r]" },
@@ -128,10 +128,10 @@ scml = (function() {
         peg$c75 = /^[a-zA-Z_0-9\-]/,
         peg$c76 = { type: "class", value: "[a-zA-Z_0-9\\-]", description: "[a-zA-Z_0-9\\-]" },
         peg$c77 = function(id) {
-            return { type: 'TAG', value: id }; 
+            return { type: 'TAG', value: id };
           },
         peg$c78 = function(id) {
-            return { type: 'ID', value: id }; 
+            return { type: 'ID', value: id };
           },
 
         peg$currPos          = 0,
@@ -1999,6 +1999,12 @@ scml = (function() {
 
       return s0;
     }
+
+
+      function removeComments (str) {
+        return str.replace(/[/][*](.|[\r\n])*?[*][/]/g, '').replace(/[/][/].*/, '');
+      }
+
 
     peg$result = peg$startRuleFunction();
 
