@@ -14,7 +14,7 @@ suite('Tests', function(){
     tree = scml.parse("@head { @title { Es verdad, pues: reprimamos } }")
     text = generate_code(tree);
     
-    assert.throws(function() { scml.parse("@head { @title { esta fiera condición, } @head"); }, /^Expected/);
+    assert.throws(function() { scml.parse("@head { @title { esta fiera condición, } } @head"); }, /^Expected/);
     
     assert.equal(tree.type, "document");
     assert.match(text,/^<!DOCTYPE html>/);
@@ -32,7 +32,7 @@ suite('Tests', function(){
     tree = scml.parse("@head { @title { esta furia, esta ambición, } } @k_an-gry { por si alguna vez soñamos. } @vacia;")
     text = generate_code(tree);
     
-    assert.throws(function() { scml.parse("@head { @title { Y sí haremos, pues estamos } @vacia{}"); }, /^Expected/);
+    assert.throws(function() { scml.parse("@head { @title { Y sí haremos, pues estamos } } @vacia{}"); }, /^Expected/);
     
     assert.equal(tree.head[0].type,"block");
     assert.equal(tree.head[0].tag,"title");
@@ -53,8 +53,8 @@ suite('Tests', function(){
     tree = scml.parse("@head { @title { en mundo tan singular, } } @kangry mokona { que el vivir sólo es soñar; } @sin_id;")
     text = generate_code(tree);
     
-    assert.throws(function() { scml.parse("@head { @title id_malvada { y la experiencia me enseña, }"); }, /^Expected/);
-    assert.throws(function() { scml.parse("@head { @title { que el hombre que vive, sueña } @kangry mokona id_malvada { lo que es, hasta despertar. }"); }, /^Expected/);
+    assert.throws(function() { scml.parse("@head { @title id_malvada { y la experiencia me enseña, } }"); }, /^Expected/);
+    assert.throws(function() { scml.parse("@head { @title { que el hombre que vive, sueña } } @kangry mokona id_malvada { lo que es, hasta despertar. }"); }, /^Expected/);
     
     expect(tree.head[0].id).to.not.exist;
     
@@ -66,10 +66,41 @@ suite('Tests', function(){
   
   test('Clases: ', function(){
     
+    tree = scml.parse("@head { @title { Sueña el rey que es rey, y vive } } @kangry .mokona { con este engaño mandando, } @kangry .clase1 .clase2; @sin_clases;")
+    text = generate_code(tree);
+    
+    assert.throws(function() { scml.parse("@head { @title .clase_malvada { disponiendo y gobernando; } }"); }, /^Expected/);
+    assert.throws(function() { scml.parse("@kangry .clase id_malvada { y este aplauso, que recibe }"); }, /^Expected/);
+    
+    expect(tree.head[0].classes).to.not.exist;
+    
+    assert.equal(tree.body[0].classes[0].id,"mokona");
+    assert.match(text,/<kangry class=\"mokona\">/);
+    
+    assert.equal(tree.body[1].classes[0].id,"clase1");
+    assert.equal(tree.body[1].classes[1].id,"clase2");
+    assert.match(text,/<kangry class=\"clase1 clase2\">/);
+    
+    expect(tree.body[2].classes).to.be.null;
   });
   
   test('Atributos: ', function(){
     
+    tree = scml.parse("@head { @meta (charset: \"utf-8\"); @link (rel: \"icon\", type: \"image/jpg\", href: \"/images/favicon.png\"); } @sin_atributos;")
+    text = generate_code(tree);
+    
+    assert.throws(function() { scml.parse("@head { @title (rel=\"utf-8\") { prestado, en el viento escribe } }"); }, /^Expected/);
+    assert.throws(function() { scml.parse("@kangry () { y en cenizas le convierte }"); }, /^Expected/);
+    
+    expect(tree.head[0].parameters).to.exist;
+    assert.equal(tree.head[0].parameters[0].id,"charset");
+    assert.equal(tree.head[0].parameters[0].value,"utf-8");
+    assert.match(text,/<meta charset="utf-8">/);
+    
+    assert.lengthOf(tree.head[1].parameters, 3);
+    assert.match(text,/<link rel="icon" type="image\/jpg" href="\/images\/favicon.png">/);
+
+    expect(tree.body[0].parameters).to.be.null;
   });
   
   test('Contenido - Texto: ', function(){
