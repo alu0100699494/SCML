@@ -10,19 +10,26 @@
   </div>
   
   <div class="row">
+    <div class="span7">
+      Seleccionar un ejemplo
+      <div class="input-control select">
+        <select onchange="changeCombo(this);">
+          <option value="HolaMundo.scml">Hola mundo</option>
+          <option value="Portada.scml">Portada</option>
+          <option value="Home.scml">Home (actual)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
     <div class="span6">
       <div class="panel">
         <div class="panel-header bg-dark fg-white">
           Código <strong>SCML</strong>
         </div>
         <div class="panel-content">
-          <textarea id="input" name="input" autofocus cols = "40" rows = "4">
-@head {
-  @title { Hola Mundo en HTML }
-  @meta (charset: "utf-8");
-}
-¡Hola Mundo!
-</textarea>
+          <textarea id="input" name="input" autofocus cols = "40" rows = "4">&lt;Vacío&gt;</textarea>
         </div>
         <div class="panel-content">
           <button id="parse" type="button" class="success">Traducir</button>
@@ -58,6 +65,10 @@
   </div>
 </div>
 
+<script type="text/javascript" src="/code_generation.js"></script>
+<script type="text/javascript" src="/scml.js"></script>
+<script type="text/javascript" src="/main.js"></script>
+
 <script>
     // Generar un editor CodeMirror a partir del textarea INPUT (se borra y se reemplaza).
     var editor1 = CodeMirror.fromTextArea(document.getElementById("input"), {
@@ -73,8 +84,24 @@
 	    readOnly: true,
       mode: "text/html"
     });
+    
+    function dump(fileName) {
+      $.get(fileName, function (data) {
+		    editor1.setValue(data);
+        run_parser();
+      });
+    };
+    
+    function changeCombo(element)
+    {
+      if(element.value == "")
+        return;
+      
+      console.log("Leyendo fichero " + element.value);
+      
+      dump("examples/" + element.value);
+    }
+    
+    dump("examples/HolaMundo.scml");
 </script>
 
-<script type="text/javascript" src="/code_generation.js"></script>
-<script type="text/javascript" src="/scml.js"></script>
-<script type="text/javascript" src="/main.js"></script>
