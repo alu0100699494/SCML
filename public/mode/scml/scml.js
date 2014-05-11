@@ -32,8 +32,6 @@ CodeMirror.defineMode("scml", function(config, parserConfig) {
           return typeof object[property] == 'function';
         });
       }
-
-      console.log(stream);
     
       if(state.context == "in_literal")
       {
@@ -173,9 +171,11 @@ CodeMirror.defineMode("scml", function(config, parserConfig) {
       {
         if (stream.eatSpace())
           return null;
-        else if(stream.match(/(?!\\)@head(?=[\s{;])/, true))  // Cazar con @head
+        else if(stream.match(/\\@/, true) )  
+          return null;
+        else if(stream.match(/@head(?=[\s{;])/, true))  // Cazar con @head
           return "keyword-head";
-        else if(stream.match( /(?!\\)@[a-zA-Z_][\-a-zA-Z_0-9]*/, true )) // Cazar con cualquier tag
+        else if(stream.match( /@[a-zA-Z_][\-a-zA-Z_0-9]*/, true )) // Cazar con cualquier tag
         {
           state.context = "after_tag"
           return "keyword";

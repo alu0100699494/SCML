@@ -1,24 +1,30 @@
+function run_parser()
+{
+  var editor = $('.CodeMirror')[0].CodeMirror;
+  var source = editor.getValue();
+  
+  try {
+   // Generar y mostrar el árbol
+    var tree = scml.parse(source);
+    $('#output').text(JSON.stringify(tree,undefined,2));
+    
+    // Generar y mostrar el código
+    var result = generate_code(tree);
+    var html_output = $('.CodeMirror')[1].CodeMirror;
+    
+    html_output.setValue(result);
+    
+    //$('#output').text(result);
+    //$('#output').html(JSON.stringify(tree,undefined,2));
+
+  } catch (e) {
+    $('#output').html('<div class="error"><pre>\n' + String(e) + '\n</pre></div>');
+  }
+}
+
 $(document).ready(function() {
   $('#parse').click(function() {
-    var editor = $('.CodeMirror')[0].CodeMirror;
-	  var source = editor.getValue();
-    
-    try {
-     // Generar y mostrar el árbol
-      var tree = scml.parse(source);
-      $('#output').html(JSON.stringify(tree,undefined,2));
-      
-      // Generar y mostrar el código
-      var result = generate_code(tree);
-      var html_output = $('.CodeMirror')[1].CodeMirror;
-	    html_output.setValue(result);
-      
-      //$('#output').text(result);
-      //$('#output').html(JSON.stringify(tree,undefined,2));
-
-    } catch (e) {
-      $('#output').html('<div class="error"><pre>\n' + String(e) + '\n</pre></div>');
-    }
+    run_parser()
   });
   
   $('#download').click(function() {

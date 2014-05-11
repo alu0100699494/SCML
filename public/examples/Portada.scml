@@ -1,0 +1,31 @@
+@head {
+
+  @meta (charset: "utf-8");
+  @title { SCML }
+  
+  @link (rel: "icon", type: "image/jpg", href: "/images/favicon.png");
+  
+  @link (href: "/css/iconFont.min.css", rel: "stylesheet");
+  
+  @script (src: "/js/jquery.min.js");
+  @script (src: "/js/jquery-ui-1.9.2.min.js");
+
+  @script (src: "/js/metro.min.js");
+
+  @script (src: "/lib/codemirror.js");
+
+  @link (rel: "stylesheet", href: "/lib/codemirror.css");
+  @link (rel: "stylesheet", href: "/css/metro-bootstrap.css");
+  
+  @link (rel: "stylesheet", href: "/css/global.css");
+}
+
+@div .outerdiv {
+  @a .logo (style: "cursor: pointer;", onclick: "javascript: window.location = '/home';");
+  @p .subtext .header .fg-white { Structured C Markup Language }
+}
+
+@div .bottombar {
+  @span .left { Procesadores de Lenguajes, 2013-2014 }
+  @span .right { Por @strong{Sergio Manuel Afonso Fumero}, @strong{Cristo González Rodríguez} y @strong{Daniel Herzog Cruz} }
+}

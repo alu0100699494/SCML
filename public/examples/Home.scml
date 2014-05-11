@@ -1,0 +1,143 @@
+﻿@head {
+
+  @meta (charset: "utf-8");
+  @title { SCML }
+  
+  @link (rel: "icon", type: "image/jpg", href: "/images/favicon.png");
+  @link (href: "/css/iconFont.min.css", rel: "stylesheet");
+  
+  @script (src: "/js/jquery.min.js");
+  @script (src: "/js/jquery-ui-1.9.2.min.js");
+
+  @script (src: "/js/metro.min.js");
+
+  @script (src: "/lib/codemirror.js");
+  @script (src: "../mode/xml/xml.js");
+  @script (src: "../mode/javascript/javascript.js");
+  @script (src: "../mode/css/css.j");
+  @script (src: "../mode/scml/scml.js");
+  @script (src: "../mode/htmlmixed/htmlmixed.js");
+
+  @link (rel: "stylesheet", href: "/lib/codemirror.css");
+  @link (rel: "stylesheet", href: "/theme/neat.css");
+  @link (rel: "stylesheet", href: "/css/metro-bootstrap.css");
+  @link (rel: "stylesheet", href: "/css/global.css");
+
+}
+
+@header {
+  @nav .navigation-bar .dark {
+    @nav .navigation-bar-content {
+      @a .element .brand .bg-gray (href: "/home", title: "Home") { Home }
+      @a .element .brand (href: "/grammar", title: "Gramática") { Gramática }
+      @a .element .brand (href: "/test", title: "Pruebas") { Pruebas }
+      @a .element .brand (href: "https://github.com/alu0100699494/SCML/wiki", title: "Documentación") { Documentación }
+      @span .element-divider;
+      @a .element .brand (href: "https://github.com/alu0100699494/SCML", title: "Repo") { Repositorio GitHub @span .icon-github-2; }
+    }
+  }
+}
+
+@div .center_page .grid {
+
+  @div .row { 
+    @div .span12 {
+      @h1 { Structured C Markup Language }
+    }
+  }
+  
+  @div .row {
+    @div .span7 {   
+      Cargar fichero 
+      @div .input-control .file {
+        @input examples (type: "file");
+        @button .btn-file;
+      }
+    }
+  }
+  
+  @div .row {
+    @div .span6 { 
+      @div .panel {
+        
+        @div .panel-header .bg-dark .fg-white {
+        
+          Código @strong { SCML }
+        }
+        @div .panel-content {
+          @textarea input (name: "input", autofocus, cols: "40", rows: "4") {
+            (")>
+              @head {
+                @title { Hola Mundo en HTML }
+                @meta (charset: "utf-8");
+              }
+              ¡Hola Mundo!
+            <(")
+          }
+        }
+        @div .panel-content {
+          @button parser .success (type: "button") { Traducir }
+        }
+      }
+    }
+    
+    @div .span6 {
+      @div .panel {
+
+        @div .panel-header .bg-dark .fg-white {
+          
+          Código @strong { HTML } generado
+        }
+        @div .panel-content {
+          @textarea html_output (name: "input", autofocus, cols: "40", rows: "4") {
+            (")>
+              @head {
+                @title { Hola Mundo en HTML }
+                @meta (charset: "utf-8");
+              }
+              ¡Hola Mundo!
+            <(")
+          }
+        }
+        @div .panel-content {
+          @button dowload .info (type: "button") { Descargar HTML }
+        }
+      }
+    }
+  }
+  
+  @div .row {
+    @div .span12 {
+      @div .panel {
+        
+        @div .panel-header .bg-dark .fg-white { 
+          Árbol AST generado
+        }
+        @div .panel-content {
+          @pre { @span output { (")> <Vacío> <(") } }
+        }
+      }
+    }
+  }
+}
+
+@script { (")>
+
+  var editor1 = CodeMirror.fromTextArea(document.getElementById("input"), {
+    lineNumbers: true,
+    theme: "neat",
+    viewportMargin: Infinity,
+    mode: "text/scml"
+  });
+  
+  var editor2 = CodeMirror.fromTextArea(document.getElementById("html_output"), {
+    lineNumbers: true,
+    viewportMargin: Infinity,
+    readOnly: true,
+    mode: "text/html"
+  });
+<(") }
+
+@script (type: "text/javascript", src: "/code_generation.js");
+@script (type: "text/javascript", src: "/scml.js");
+@script (type: "text/javascript", src: "/main.js");
