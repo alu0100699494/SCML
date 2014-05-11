@@ -105,14 +105,48 @@ suite('Tests', function(){
   
   test('Contenido - Texto: ', function(){
 
+    tree = scml.parse("@head { @title { la muerte (¡desdicha fuerte!): } } @kangry { ¡que hay quien intente reinar } \\@no_soy_una_etiqueta");
+    text = generate_code(tree);
+    
+    assert.throws(function() { scml.parse("@p { @ y } dentro del texto }"); }, /^Expected/);
+    
+    expect(tree.head[0].content).to.exist;
+    assert.equal(tree.head[0].content[0].type,"text");
+    assert.equal(tree.head[0].content[0].content[0].type,"literal");
+    assert.equal(tree.head[0].content[0].content[0].content,"la muerte (¡desdicha fuerte!): ");
+    assert.match(text,/<title>la muerte \(&iexcl;desdicha fuerte!\):<\/title>/);
+    
+    assert.equal(tree.body[0].content[0].content[0].type,"literal");
+    assert.match(text,/<kangry>&iexcl;que hay quien intente reinar<\/kangry>/);
+    
+    assert.notEqual(tree.body[1].type, "block");
+    assert.equal(tree.body[1].content[0].type,"literal");
+    assert.equal(tree.body[1].content[0].content,"\\@no_soy_una_etiqueta");
+    assert.match(text,/@no_soy_una_etiqueta<\/body>/);
   });
   
   test('Contenido - Literal: ', function(){
-
+    
+    tree = scml.parse("@pre { @span output { (\")> ¡que hay quien intente reinar <(\") viendo que ha de despertar } } @script { (\")> var x = 42 <(\") }")
+    text = generate_code(tree);
+    
+    assert.equal(tree.body[0].content[0].content[0].type,"text");
+    assert.equal(tree.body[0].content[0].content[0].content[0].type,"raw_literal");
+    assert.equal(tree.body[0].content[0].content[0].content[0].content,"¡que hay quien intente reinar");
+    assert.equal(tree.body[0].content[0].content[0].content[1].content,"viendo que ha de despertar ");
+    assert.match(text,/<span id="output">¡que hay quien intente reinar\nviendo que ha de despertar\n<\/span>/);
+    
+    assert.equal(tree.body[1].content[0].content[0].type,"raw_literal");
+    assert.match(text,/<script>var x = 42<\/script>/);
   });
   
   test('Comentarios: ', function(){
-
+    
+    tree = scml.parse("@p; // Comentario salvaje\n @p; /** en el sueño\nde la muerte! **/")
+    text = generate_code(tree);
+    
+    assert.notMatch(text,/Comentario salvaje/);
+    assert.notMatch(text,/de la muerte/);
   });
 
 });
