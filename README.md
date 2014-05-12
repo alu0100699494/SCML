@@ -16,7 +16,7 @@ Hola Mundo
 ```
 Se ha creado SCML con la idea no sólo de facilitar el aprendizaje en cuanto a la elaboración de páginas web se refiere _(proporcionando una aplicación de traducción automática de SCML a HTML)_, sino también la de ofrecer una **alternativa** cómoda e intuitiva para todos aquellos usuarios acostumbrados a emplear lenguajes de programación estructurados u orientados a objetos basados en C.
 
-> Para la información acerca de la utilización y sintaxis del lenguaje, acceder a la [[Sintaxis de SCML]]
+> Para la información acerca de la utilización y sintaxis del lenguaje, acceder a la [Sintaxis de SCML](https://github.com/alu0100699494/SCML/wiki/Sintaxis-de-SCML)
 
 ## 2. Acceso a la página web ##
 Se puede acceder a la página web desde el siguiente enlace:
